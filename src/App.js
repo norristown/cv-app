@@ -9,36 +9,42 @@ export default function App() {
     number: "",
     email: "",
   });
-  const [work, setWork] = useState([
-    {
-      title: "",
-      company: "",
-      address: "",
-      from: "",
-      until: "",
-    },
-  ]);
   function handleChange(e) {
     const name = e.target.name;
     const value = e.target.value;
     setInputs((prev) => {
-      //slice()
       return { ...prev, [name]: value };
     });
   }
-  function handleWork(e) {
-    const name = e.target.name;
-    const value = e.target.value;
 
-    setWork((work) => {
-      return { ...work, [name]: value };
-    });
+  const [work, setWork] = useState([]);
+  function handleWork(workInput) {
+    console.log(work);
+    setWork((work) => [...work, workInput]);
   }
+  const [title, setTitle] = useState("");
+  const [company, setCompany] = useState("");
+  const [address, setAddress] = useState("");
+  const [from, setFrom] = useState("");
+  const [until, setUntil] = useState("");
   return (
     <div className="app">
       <Header />
       <div className="main">
-        <Form onHandleChange={handleChange} onHandleWork={handleWork} />
+        <Form
+          onHandleChange={handleChange}
+          onAddWork={handleWork}
+          title={title}
+          onSetTitle={setTitle}
+          company={company}
+          onSetCompany={setCompany}
+          address={address}
+          onSetAddress={setAddress}
+          from={from}
+          onSetFrom={setFrom}
+          until={until}
+          onSetUntil={setUntil}
+        />
         <FormPreview inputs={inputs} />
       </div>
     </div>
@@ -104,9 +110,28 @@ function Input({ name, placeholder, onChange }) {
     </>
   );
 }
-function Form({ onHandleChange, onHandleWork }) {
+function Form({
+  onHandleChange,
+  onAddWork,
+  title,
+  onSetTitle,
+  company,
+  onSetCompany,
+  address,
+  onSetAddress,
+  from,
+  onSetFrom,
+  until,
+  onSetUntil,
+}) {
+  function handleSubmit(e) {
+    e.preventDefault();
+    const newWorkHistory = { title, company, address, from, until };
+    onAddWork(newWorkHistory);
+  }
+
   return (
-    <form className="inputField">
+    <form className="inputField" onSubmit={handleSubmit}>
       <div className="personal-info" id="input">
         <h3>Personal Information</h3>
         <Input
@@ -129,13 +154,38 @@ function Form({ onHandleChange, onHandleWork }) {
         <Input
           placeholder="Job Title"
           name="title"
-          onChange={onHandleWork}
-          id
+          onChange={(e) => {
+            onSetTitle(e.target.value);
+          }}
         />
-        <Input placeholder="Company" name="company" onChange={onHandleWork} />
-        <Input placeholder="Address" name="address" onChange={onHandleWork} />
-        <Input placeholder="From" name="from" onChange={onHandleWork} />
-        <Input placeholder="Until" name="until" onChange={onHandleWork} />
+        <Input
+          placeholder="Company"
+          name="company"
+          onChange={(e) => {
+            onSetCompany(e.target.value);
+          }}
+        />
+        <Input
+          placeholder="Address"
+          name="address"
+          onChange={(e) => {
+            onSetAddress(e.target.value);
+          }}
+        />
+        <Input
+          placeholder="From"
+          name="from"
+          onChange={(e) => {
+            onSetFrom(e.target.value);
+          }}
+        />
+        <Input
+          placeholder="Until"
+          name="until"
+          onChange={(e) => {
+            onSetUntil(e.target.value);
+          }}
+        />
         <div className="buttons">
           <button>Delete</button>
           <button>Add</button>
