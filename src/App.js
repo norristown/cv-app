@@ -1,13 +1,27 @@
 import { useState } from "react";
 
 export default function App() {
-  const [preview, setPreview] = useState("");
+  const [inputs, setInputs] = useState({
+    first: "",
+    last: "",
+    title: "",
+    address: "",
+    number: "",
+    email: "",
+  });
+  function handleChange(e) {
+    const name = e.target.name;
+    const value = e.target.value;
+    setInputs((prev) => {
+      return { ...prev, [name]: value };
+    });
+  }
   return (
     <div className="app">
       <Header />
       <div className="main">
-        <Form />
-        <FormPreview />
+        <Form onHandleChange={handleChange} />
+        <FormPreview inputs={inputs} />
       </div>
     </div>
   );
@@ -16,12 +30,19 @@ export default function App() {
 function Header() {
   return <h1 className="main-header">CV Generator</h1>;
 }
-function FormPreview() {
+function FormPreview({ inputs }) {
   return (
     <div className="main-preview">
-      <h1>FormPreview</h1>
+      <h1>Heading</h1>
       <div className="sub-preview">
-        <div className="description"></div>
+        <div className="description">
+          <div>{inputs.first}</div>
+          <div>{inputs.last}</div>
+          <div>{inputs.title}</div>
+          <div>{inputs.address}</div>
+          <div>{inputs.number}</div>
+          <div>{inputs.email}</div>
+        </div>
         <div className="experience"></div>
         <div className="education"></div>
       </div>
@@ -38,29 +59,38 @@ function FormPreview() {
     </div>
   );
 }
-
-function Form() {
-  function handleSubmit(e) {
-    e.preventDefault();
-  }
-  function Input({ placeholder }) {
-    return (
-      <>
-        <input type="text" placeholder={placeholder} />
-        <br />
-      </>
-    );
-  }
+function Input({ name, placeholder, onChange }) {
   return (
-    <form onSubmit={handleSubmit}>
+    <>
+      <input
+        type="text"
+        placeholder={placeholder}
+        name={name}
+        onChange={onChange}
+      />
+      <br />
+    </>
+  );
+}
+function Form({ onHandleChange }) {
+  return (
+    <form>
       <div className="personal-info">
         <h3>Personal Information</h3>
-        <Input placeholder="First Name" />
-        <Input placeholder="Last Name" />
-        <Input placeholder="Title" />
-        <Input placeholder="Address" />
-        <Input placeholder="Phone Number" />
-        <Input placeholder="Address" />
+        <Input
+          placeholder="First Name"
+          name="first"
+          onChange={onHandleChange}
+        />
+        <Input placeholder="Last Name" name="last" onChange={onHandleChange} />
+        <Input placeholder="Title" name="title" onChange={onHandleChange} />
+        <Input placeholder="Address" name="address" onChange={onHandleChange} />
+        <Input
+          placeholder="Phone Number"
+          name="number"
+          onChange={onHandleChange}
+        />
+        <Input placeholder="Email" name="email" onChange={onHandleChange} />
       </div>
       <div className="experience">
         <h3>Work History</h3>
