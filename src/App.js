@@ -1,14 +1,7 @@
 import { useState } from "react";
 
 export default function App() {
-  const [inputs, setInputs] = useState({
-    first: "",
-    last: "",
-    title: "",
-    address: "",
-    number: "",
-    email: "",
-  });
+  const [inputs, setInputs] = useState({});
   function handleChange(e) {
     const name = e.target.name;
     const value = e.target.value;
@@ -18,34 +11,18 @@ export default function App() {
   }
 
   const [work, setWork] = useState([]);
-  function handleWork(workInput) {
-    console.log(work);
-    setWork((work) => [...work, workInput]);
+  function handleWork(e) {
+    const name = e.target.name;
+    const value = e.target.value;
+    setWork({ ...work, [name]: value });
   }
-  const [title, setTitle] = useState("");
-  const [company, setCompany] = useState("");
-  const [address, setAddress] = useState("");
-  const [from, setFrom] = useState("");
-  const [until, setUntil] = useState("");
+
   return (
     <div className="app">
       <Header />
       <div className="main">
-        <Form
-          onHandleChange={handleChange}
-          onAddWork={handleWork}
-          title={title}
-          onSetTitle={setTitle}
-          company={company}
-          onSetCompany={setCompany}
-          address={address}
-          onSetAddress={setAddress}
-          from={from}
-          onSetFrom={setFrom}
-          until={until}
-          onSetUntil={setUntil}
-        />
-        <FormPreview inputs={inputs} />
+        <Form onHandleChange={handleChange} onAddWork={handleWork} />
+        <FormPreview inputs={inputs} work={work} />
       </div>
     </div>
   );
@@ -54,7 +31,7 @@ export default function App() {
 function Header() {
   return <h1 className="main-header">CV Generator</h1>;
 }
-function FormPreview({ inputs }) {
+function FormPreview({ inputs, work }) {
   return (
     <div className="main-preview">
       <header>
@@ -68,7 +45,6 @@ function FormPreview({ inputs }) {
         <div className="description">
           <div>
             <h3>Description</h3>
-            <p>Description text</p>
           </div>
           <div>{inputs.title}</div>
           <div>{inputs.address}</div>
@@ -77,7 +53,13 @@ function FormPreview({ inputs }) {
         </div>
         <div className="experience">
           <h3>Experience</h3>
-          <p>Experience text area</p>
+          <div>{work.title}</div>
+          <div>{work.company}</div>
+          <div>{work.address}</div>
+
+          <div>
+            {work.from} - {work.until}
+          </div>
         </div>
         <div className="education">
           <h3>Education</h3>
@@ -110,28 +92,9 @@ function Input({ name, placeholder, onChange }) {
     </>
   );
 }
-function Form({
-  onHandleChange,
-  onAddWork,
-  title,
-  onSetTitle,
-  company,
-  onSetCompany,
-  address,
-  onSetAddress,
-  from,
-  onSetFrom,
-  until,
-  onSetUntil,
-}) {
-  function handleSubmit(e) {
-    e.preventDefault();
-    const newWorkHistory = { title, company, address, from, until };
-    onAddWork(newWorkHistory);
-  }
-
+function Form({ onHandleChange, onAddWork }) {
   return (
-    <form className="inputField" onSubmit={handleSubmit}>
+    <form className="inputField">
       <div className="personal-info" id="input">
         <h3>Personal Information</h3>
         <Input
@@ -151,41 +114,11 @@ function Form({
       </div>
       <div className="experience" id="input">
         <h3>Work History</h3>
-        <Input
-          placeholder="Job Title"
-          name="title"
-          onChange={(e) => {
-            onSetTitle(e.target.value);
-          }}
-        />
-        <Input
-          placeholder="Company"
-          name="company"
-          onChange={(e) => {
-            onSetCompany(e.target.value);
-          }}
-        />
-        <Input
-          placeholder="Address"
-          name="address"
-          onChange={(e) => {
-            onSetAddress(e.target.value);
-          }}
-        />
-        <Input
-          placeholder="From"
-          name="from"
-          onChange={(e) => {
-            onSetFrom(e.target.value);
-          }}
-        />
-        <Input
-          placeholder="Until"
-          name="until"
-          onChange={(e) => {
-            onSetUntil(e.target.value);
-          }}
-        />
+        <Input placeholder="Job Title" name="title" onChange={onAddWork} />
+        <Input placeholder="Company" name="company" onChange={onAddWork} />
+        <Input placeholder="Address" name="address" onChange={onAddWork} />
+        <Input placeholder="From" name="from" onChange={onAddWork} />
+        <Input placeholder="Until" name="until" onChange={onAddWork} />
         <div className="buttons">
           <button>Delete</button>
           <button>Add</button>
