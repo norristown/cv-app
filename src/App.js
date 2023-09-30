@@ -10,18 +10,65 @@ export default function App() {
     });
   }
 
-  const [work, setWork] = useState([]);
-  function handleWork(e) {
+  const [work, setWork] = useState({
+    workHistory: [
+      {
+        id: Date.now(),
+        title: "",
+        company: "",
+        address: "",
+        from: "",
+        until: "",
+      },
+    ],
+    education: [
+      {
+        title: "",
+        city: "",
+        degree: "",
+        from: "",
+        until: "",
+      },
+    ],
+  });
+  function handleWork(e, id) {
     const name = e.target.name;
     const value = e.target.value;
-    setWork({ ...work, [name]: value });
+    setWork((prev) => {
+      const newWork = prev.workHistory.map((item) => {
+        return { ...item, [name]: value };
+      });
+      return { ...prev, workHistory: [...newWork] };
+    });
+  }
+
+  function addWork() {
+    setWork((prev) => ({
+      ...prev,
+      workHistory: [
+        ...prev.workHistory,
+        {
+          id: Date.now(),
+          title: "",
+          company: "",
+          address: "",
+          from: "",
+          until: "",
+        },
+      ],
+    }));
   }
 
   return (
     <div className="app">
       <Header />
       <div className="main">
-        <Form onHandleChange={handleChange} onAddWork={handleWork} />
+        <Form
+          onHandleChange={handleChange}
+          onHandleWork={handleWork}
+          work={work}
+          onAddWork={addWork}
+        />
         <FormPreview inputs={inputs} work={work} />
       </div>
     </div>
@@ -53,12 +100,12 @@ function FormPreview({ inputs, work }) {
         </div>
         <div className="experience">
           <h3>Experience</h3>
-          <div>{work.title}</div>
-          <div>{work.company}</div>
-          <div>{work.address}</div>
+          <div>{work.workHistory[0].title}</div>
+          <div>{work.workHistory[0].company}</div>
+          <div>{work.workHistory[0].address}</div>
 
           <div>
-            {work.from} - {work.until}
+            {work.workHistory[0].from} - {work.workHistory[0].until}
           </div>
         </div>
         <div className="education">
@@ -79,7 +126,7 @@ function FormPreview({ inputs, work }) {
     </div>
   );
 }
-function Input({ name, placeholder, onChange }) {
+function Input({ name, placeholder, onChange, value }) {
   return (
     <>
       <input
@@ -87,14 +134,19 @@ function Input({ name, placeholder, onChange }) {
         placeholder={placeholder}
         name={name}
         onChange={onChange}
+        value={value}
       />
       <br />
     </>
   );
 }
-function Form({ onHandleChange, onAddWork }) {
+function Form({ onHandleChange, onHandleWork, onAddWork, work }) {
+  function handleSubmit(e) {
+    e.preventDefault();
+  }
+
   return (
-    <form className="inputField">
+    <form className="inputField" onSubmit={handleSubmit}>
       <div className="personal-info" id="input">
         <h3>Personal Information</h3>
         <Input
@@ -114,14 +166,20 @@ function Form({ onHandleChange, onAddWork }) {
       </div>
       <div className="experience" id="input">
         <h3>Work History</h3>
-        <Input placeholder="Job Title" name="title" onChange={onAddWork} />
-        <Input placeholder="Company" name="company" onChange={onAddWork} />
-        <Input placeholder="Address" name="address" onChange={onAddWork} />
-        <Input placeholder="From" name="from" onChange={onAddWork} />
-        <Input placeholder="Until" name="until" onChange={onAddWork} />
+
+        <Input
+          placeholder="Job Title"
+          name="title"
+          onChange={onHandleWork}
+          value={work.workHistory[0].title}
+        />
+        <Input placeholder="Company" name="company" onChange={onHandleWork} />
+        <Input placeholder="Address" name="address" onChange={onHandleWork} />
+        <Input placeholder="From" name="from" onChange={onHandleWork} />
+        <Input placeholder="Until" name="until" onChange={onHandleWork} />
         <div className="buttons">
           <button>Delete</button>
-          <button>Add</button>
+          <button onClick={onAddWork}>Add</button>
         </div>
       </div>
 
