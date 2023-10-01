@@ -62,6 +62,14 @@ export default function App() {
     }));
   }
 
+  function deleteWork(id) {
+    setWork((prev) => {
+      console.log("delete");
+      const newWork = prev.workHistory.filter((item) => item.id !== id);
+      return { ...prev, workHistory: [...newWork] };
+    });
+  }
+
   return (
     <div className="app">
       <Header />
@@ -71,6 +79,7 @@ export default function App() {
           onHandleWork={handleWork}
           work={work}
           onAddWork={addWork}
+          onDeleteWork={deleteWork}
         />
         <FormPreview inputs={inputs} work={work} />
       </div>
@@ -156,7 +165,7 @@ function Input({ name, placeholder, onChange, value, id }) {
     </>
   );
 }
-function WorkSection({ onHandleWork, work, onAddWork, id }) {
+function WorkSection({ onHandleWork, work, onAddWork, id, onDeleteWork }) {
   return (
     <div>
       <Input
@@ -190,13 +199,13 @@ function WorkSection({ onHandleWork, work, onAddWork, id }) {
         value={work.workHistory.find((x) => x.id === id).until}
       />
       <div className="buttons">
-        <button>Delete</button>
+        <button onClick={() => onDeleteWork(id)}>Delete</button>
         <button onClick={onAddWork}>Add</button>
       </div>
     </div>
   );
 }
-function Form({ onHandleChange, onHandleWork, onAddWork, work }) {
+function Form({ onHandleChange, onHandleWork, onAddWork, work, onDeleteWork }) {
   function handleSubmit(e) {
     e.preventDefault();
   }
@@ -230,6 +239,7 @@ function Form({ onHandleChange, onHandleWork, onAddWork, work }) {
               onHandleWork={onHandleWork}
               work={work}
               onAddWork={onAddWork}
+              onDeleteWork={onDeleteWork}
             />
           ))}
         </div>
