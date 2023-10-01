@@ -335,56 +335,66 @@ function Form({
   description,
 }) {
   return (
-    <div className="inputField">
-      <div className="personal-info" id="input">
-        <h3>Personal Information</h3>
-        <Input
-          placeholder="First Name"
-          name="first"
-          onChange={onHandleChange}
-        />
-        <Input placeholder="Last Name" name="last" onChange={onHandleChange} />
-        <Input placeholder="Title" name="title" onChange={onHandleChange} />
-        <Input placeholder="Address" name="address" onChange={onHandleChange} />
-        <Input
-          placeholder="Phone Number"
-          name="number"
-          onChange={onHandleChange}
-        />
-        <Input placeholder="Email" name="email" onChange={onHandleChange} />
-        <textarea
-          value={description}
-          onChange={(e) => onSetDescription(e.target.value)}
-        ></textarea>
-      </div>
-      <div className="experience" id="input">
-        <h3>Work History</h3>
-        <div>
-          {work.workHistory.map((x) => (
-            <WorkSection
+    <div className="main-left">
+      <div className="form">
+        <div className="personal-info" id="input">
+          <h3>Personal Information</h3>
+          <Input
+            placeholder="First Name"
+            name="first"
+            onChange={onHandleChange}
+          />
+          <Input
+            placeholder="Last Name"
+            name="last"
+            onChange={onHandleChange}
+          />
+          <Input placeholder="Title" name="title" onChange={onHandleChange} />
+          <Input
+            placeholder="Address"
+            name="address"
+            onChange={onHandleChange}
+          />
+          <Input
+            placeholder="Phone Number"
+            name="number"
+            onChange={onHandleChange}
+          />
+          <Input placeholder="Email" name="email" onChange={onHandleChange} />
+          <textarea
+            value={description}
+            onChange={(e) => onSetDescription(e.target.value)}
+          ></textarea>
+        </div>
+        <div className="experience" id="input">
+          <h3>Work History</h3>
+          <div>
+            {work.workHistory.map((x) => (
+              <WorkSection
+                key={x.id}
+                id={x.id}
+                onHandleWork={onHandleWork}
+                work={work}
+                onAddWork={onAddWork}
+                onDeleteWork={onDeleteWork}
+              />
+            ))}
+          </div>
+        </div>
+
+        <div className="education" id="input">
+          <h3>Education</h3>
+          {work.education.map((x) => (
+            <EducationSection
               key={x.id}
               id={x.id}
-              onHandleWork={onHandleWork}
+              onHandleEducation={onHandleEducation}
+              onAddEducation={onAddEducation}
+              onDeleteEducation={onDeleteEducation}
               work={work}
-              onAddWork={onAddWork}
-              onDeleteWork={onDeleteWork}
             />
           ))}
         </div>
-      </div>
-
-      <div className="education" id="input">
-        <h3>Education</h3>
-        {work.education.map((x) => (
-          <EducationSection
-            key={x.id}
-            id={x.id}
-            onHandleEducation={onHandleEducation}
-            onAddEducation={onAddEducation}
-            onDeleteEducation={onDeleteEducation}
-            work={work}
-          />
-        ))}
       </div>
     </div>
   );

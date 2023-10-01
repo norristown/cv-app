@@ -17,39 +17,18 @@ code {
   height: 100vh;
 }
 
+input,
+textarea {
+  width: 100%;
+  border: 1px solid grey;
+  border-radius: 3px;
+  height: 2rem;
+}
+
 .main {
   display: flex;
   justify-content: center;
-  /* width: 75%; */
+  width: 50%;
   gap: 2rem;
   margin: 0 10rem;
-}
-
-.main-header {
-  text-align: center;
-}
-
-header {
-  background-color: grey;
-  height: 15%;
-  width: 100%;
-}
-
-.main-preview {
-  background-color: silver;
-  width: 50%;
-}
-
-.inputField {
-  background-color: lightblue;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 50%;
-}
-
-#input {
-  display: flex;
-  flex-direction: column;
-  width: 50%;
 }
