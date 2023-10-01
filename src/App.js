@@ -81,6 +81,20 @@ export default function App() {
 function Header() {
   return <h1 className="main-header">CV Generator</h1>;
 }
+function PreviewSection({ id, work }) {
+  return (
+    <div>
+      <div>{work.workHistory.find((x) => x.id === id).title}</div>
+      <div>{work.workHistory.find((x) => x.id === id).company}</div>
+      <div>{work.workHistory.find((x) => x.id === id).address}</div>
+
+      <div>
+        {work.workHistory.find((x) => x.id === id).from} -{" "}
+        {work.workHistory.find((x) => x.id === id).until}
+      </div>
+    </div>
+  );
+}
 function FormPreview({ inputs, work }) {
   return (
     <div className="main-preview">
@@ -103,12 +117,10 @@ function FormPreview({ inputs, work }) {
         </div>
         <div className="experience">
           <h3>Experience</h3>
-          <div>{work.workHistory[0].title}</div>
-          <div>{work.workHistory[0].company}</div>
-          <div>{work.workHistory[0].address}</div>
-
           <div>
-            {work.workHistory[0].from} - {work.workHistory[0].until}
+            {work.workHistory.map((x) => (
+              <PreviewSection key={x.id} id={x.id} work={work} />
+            ))}
           </div>
         </div>
         <div className="education">
