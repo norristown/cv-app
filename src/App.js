@@ -36,7 +36,10 @@ export default function App() {
     const value = e.target.value;
     setWork((prev) => {
       const newWork = prev.workHistory.map((item) => {
-        return { ...item, [name]: value };
+        if (item.id === id) {
+          return { ...item, [name]: value };
+        }
+        return item;
       });
       return { ...prev, workHistory: [...newWork] };
     });
@@ -126,7 +129,7 @@ function FormPreview({ inputs, work }) {
     </div>
   );
 }
-function Input({ name, placeholder, onChange, value }) {
+function Input({ name, placeholder, onChange, value, id }) {
   return (
     <>
       <input
@@ -135,9 +138,50 @@ function Input({ name, placeholder, onChange, value }) {
         name={name}
         onChange={onChange}
         value={value}
+        id={id}
       />
       <br />
     </>
+  );
+}
+function WorkSection({ onHandleWork, work, onAddWork, id }) {
+  return (
+    <div>
+      <Input
+        placeholder="Job Title"
+        name="title"
+        onChange={(e) => onHandleWork(e, id)}
+        value={work.workHistory.find((x) => x.id === id).title}
+      />
+      <Input
+        placeholder="Company"
+        name="company"
+        onChange={(e) => onHandleWork(e, id)}
+        value={work.workHistory.find((x) => x.id === id).company}
+      />
+      <Input
+        placeholder="Address"
+        name="address"
+        onChange={(e) => onHandleWork(e, id)}
+        value={work.workHistory.find((x) => x.id === id).address}
+      />
+      <Input
+        placeholder="From"
+        name="from"
+        onChange={(e) => onHandleWork(e, id)}
+        value={work.workHistory.find((x) => x.id === id).from}
+      />
+      <Input
+        placeholder="Until"
+        name="until"
+        onChange={(e) => onHandleWork(e, id)}
+        value={work.workHistory.find((x) => x.id === id).until}
+      />
+      <div className="buttons">
+        <button>Delete</button>
+        <button onClick={onAddWork}>Add</button>
+      </div>
+    </div>
   );
 }
 function Form({ onHandleChange, onHandleWork, onAddWork, work }) {
@@ -166,20 +210,16 @@ function Form({ onHandleChange, onHandleWork, onAddWork, work }) {
       </div>
       <div className="experience" id="input">
         <h3>Work History</h3>
-
-        <Input
-          placeholder="Job Title"
-          name="title"
-          onChange={onHandleWork}
-          value={work.workHistory[0].title}
-        />
-        <Input placeholder="Company" name="company" onChange={onHandleWork} />
-        <Input placeholder="Address" name="address" onChange={onHandleWork} />
-        <Input placeholder="From" name="from" onChange={onHandleWork} />
-        <Input placeholder="Until" name="until" onChange={onHandleWork} />
-        <div className="buttons">
-          <button>Delete</button>
-          <button onClick={onAddWork}>Add</button>
+        <div>
+          {work.workHistory.map((x) => (
+            <WorkSection
+              key={x.id}
+              id={x.id}
+              onHandleWork={onHandleWork}
+              work={work}
+              onAddWork={onAddWork}
+            />
+          ))}
         </div>
       </div>
 
