@@ -67,10 +67,28 @@ export default function App() {
   }
 
   function deleteWork(id) {
-    setWork((prev) => {
-      const newWork = prev.workHistory.filter((item) => item.id !== id);
-      return { ...prev, workHistory: [...newWork] };
-    });
+    if (work.workHistory.length !== 1) {
+      setWork((prev) => {
+        const newWork = prev.workHistory.filter((item) => item.id !== id);
+        return { ...prev, workHistory: [...newWork] };
+      });
+    } else {
+      setWork((prev) => {
+        return {
+          ...prev,
+          workHistory: [
+            {
+              id: Date.now(),
+              title: "",
+              company: "",
+              address: "",
+              from: "",
+              until: "",
+            },
+          ],
+        };
+      });
+    }
   }
 
   function handleEducation(e, id) {
@@ -98,10 +116,28 @@ export default function App() {
   }
 
   function deleteEducation(id) {
-    setWork((prev) => {
-      const newEducation = prev.education.filter((item) => item.id !== id);
-      return { ...prev, education: [...newEducation] };
-    });
+    if (work.education.length !== 1) {
+      setWork((prev) => {
+        const newEducation = prev.education.filter((item) => item.id !== id);
+        return { ...prev, education: [...newEducation] };
+      });
+    } else {
+      setWork((prev) => {
+        return {
+          ...prev,
+          education: [
+            {
+              id: Date.now(),
+              name: "",
+              city: "",
+              degree: "",
+              from: "",
+              until: "",
+            },
+          ],
+        };
+      });
+    }
   }
 
   return (
@@ -122,6 +158,7 @@ export default function App() {
         />
         <FormPreview inputs={inputs} work={work} description={description} />
       </div>
+      <Footer />
     </div>
   );
 }
@@ -395,6 +432,10 @@ function Form({
       </div>
     </div>
   );
+}
+
+function Footer() {
+  return <footer>Kevin Jarvis</footer>;
 }
 
 function ClearForm() {}

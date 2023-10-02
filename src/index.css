@@ -66,3 +66,8 @@ textarea {
   display: flex;
   flex-direction: column;
 }
+footer {
+  margin-top: 2rem;
+  background-color: grey;
+  text-align: center;
+}
