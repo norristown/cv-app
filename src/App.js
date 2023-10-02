@@ -68,7 +68,6 @@ export default function App() {
 
   function deleteWork(id) {
     setWork((prev) => {
-      console.log("delete");
       const newWork = prev.workHistory.filter((item) => item.id !== id);
       return { ...prev, workHistory: [...newWork] };
     });
@@ -174,47 +173,41 @@ function FormPreview({ inputs, work, description }) {
             <h3>Description</h3>
             <p>{description}</p>
           </div>
+          <div className="experience">
+            <h3>Experience</h3>
+            <div>
+              {work.workHistory.map((x) => (
+                <PreviewSectionWork
+                  key={x.id}
+                  id={x.id}
+                  work={work.workHistory}
+                />
+              ))}
+            </div>
+          </div>
+          <div className="education">
+            <h3>Education</h3>
+            <div>
+              {work.education.map((x) => (
+                <PreviewSectionEducation
+                  key={x.id}
+                  id={x.id}
+                  work={work.education}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+        <div className="personal-preview">
           <div className="personal-details">
             <h3>Personal Details</h3>
-            <div>{inputs.title}</div>
+            <div className="avatar">
+              <img src="" alt="avatar" />
+            </div>
             <div>{inputs.address}</div>
             <div>{inputs.number}</div>
             <div>{inputs.email}</div>
           </div>
-        </div>
-        <div className="experience">
-          <h3>Experience</h3>
-          <div>
-            {work.workHistory.map((x) => (
-              <PreviewSectionWork
-                key={x.id}
-                id={x.id}
-                work={work.workHistory}
-              />
-            ))}
-          </div>
-        </div>
-        <div className="education">
-          <h3>Education</h3>
-          <div>
-            {work.education.map((x) => (
-              <PreviewSectionEducation
-                key={x.id}
-                id={x.id}
-                work={work.education}
-              />
-            ))}
-          </div>
-        </div>
-      </div>
-      <div className="personal-preview">
-        <div className="avatar">
-          <img src="" alt="avatar" />
-        </div>
-        <div className="personal-details">
-          <div>Address</div>
-          <div>Phone Number</div>
-          <div>Email</div>
         </div>
       </div>
     </div>
@@ -237,7 +230,7 @@ function Input({ name, placeholder, onChange, value, id }) {
 }
 function WorkSection({ onHandleWork, work, onAddWork, id, onDeleteWork }) {
   return (
-    <div>
+    <>
       <Input
         placeholder="Job Title"
         name="title"
@@ -272,7 +265,7 @@ function WorkSection({ onHandleWork, work, onAddWork, id, onDeleteWork }) {
         <button onClick={() => onDeleteWork(id)}>Delete</button>
         <button onClick={onAddWork}>Add</button>
       </div>
-    </div>
+    </>
   );
 }
 
@@ -284,7 +277,7 @@ function EducationSection({
   id,
 }) {
   return (
-    <div>
+    <>
       <Input
         placeholder="College/University"
         name="name"
@@ -319,7 +312,7 @@ function EducationSection({
         <button onClick={() => onDeleteEducation(id)}>Delete</button>
         <button onClick={onAddEducation}>Add</button>
       </div>
-    </div>
+    </>
   );
 }
 function Form({
@@ -337,38 +330,40 @@ function Form({
   return (
     <div className="main-left">
       <div className="form">
-        <div className="personal-info" id="input">
+        <div className="personal-info">
           <h3>Personal Information</h3>
-          <Input
-            placeholder="First Name"
-            name="first"
-            onChange={onHandleChange}
-          />
-          <Input
-            placeholder="Last Name"
-            name="last"
-            onChange={onHandleChange}
-          />
-          <Input placeholder="Title" name="title" onChange={onHandleChange} />
-          <Input
-            placeholder="Address"
-            name="address"
-            onChange={onHandleChange}
-          />
-          <Input
-            placeholder="Phone Number"
-            name="number"
-            onChange={onHandleChange}
-          />
-          <Input placeholder="Email" name="email" onChange={onHandleChange} />
-          <textarea
-            value={description}
-            onChange={(e) => onSetDescription(e.target.value)}
-          ></textarea>
+          <div className="input-field">
+            <Input
+              placeholder="First Name"
+              name="first"
+              onChange={onHandleChange}
+            />
+            <Input
+              placeholder="Last Name"
+              name="last"
+              onChange={onHandleChange}
+            />
+            <Input placeholder="Title" name="title" onChange={onHandleChange} />
+            <Input
+              placeholder="Address"
+              name="address"
+              onChange={onHandleChange}
+            />
+            <Input
+              placeholder="Phone Number"
+              name="number"
+              onChange={onHandleChange}
+            />
+            <Input placeholder="Email" name="email" onChange={onHandleChange} />
+            <textarea
+              value={description}
+              onChange={(e) => onSetDescription(e.target.value)}
+            ></textarea>
+          </div>
         </div>
-        <div className="experience" id="input">
+        <div className="experience">
           <h3>Work History</h3>
-          <div>
+          <div className="input-field">
             {work.workHistory.map((x) => (
               <WorkSection
                 key={x.id}
@@ -382,18 +377,20 @@ function Form({
           </div>
         </div>
 
-        <div className="education" id="input">
+        <div className="education">
           <h3>Education</h3>
-          {work.education.map((x) => (
-            <EducationSection
-              key={x.id}
-              id={x.id}
-              onHandleEducation={onHandleEducation}
-              onAddEducation={onAddEducation}
-              onDeleteEducation={onDeleteEducation}
-              work={work}
-            />
-          ))}
+          <div className="input-field">
+            {work.education.map((x) => (
+              <EducationSection
+                key={x.id}
+                id={x.id}
+                onHandleEducation={onHandleEducation}
+                onAddEducation={onAddEducation}
+                onDeleteEducation={onDeleteEducation}
+                work={work}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </div>
