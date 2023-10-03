@@ -1,6 +1,36 @@
 import { useState } from "react";
 
 export default function App() {
+  const clearInputs = {
+    id: Date.now(),
+    title: "",
+    company: "",
+    address: "",
+    from: "",
+    until: "",
+  };
+  const clearWork = {
+    workHistory: [
+      {
+        id: Date.now(),
+        title: "",
+        company: "",
+        address: "",
+        from: "",
+        until: "",
+      },
+    ],
+    education: [
+      {
+        id: Date.now(),
+        name: "",
+        city: "",
+        degree: "",
+        from: "",
+        until: "",
+      },
+    ],
+  };
   const exampleInputs = {
     first: "John",
     last: "Doe",
@@ -190,6 +220,8 @@ export default function App() {
           onSetWork={setWork}
           exampleInputs={exampleInputs}
           exampleWork={exampleWork}
+          clearWork={clearWork}
+          clearInputs={clearInputs}
         />
         <FormPreview inputs={inputs} work={work} description={description} />
       </div>
@@ -406,6 +438,8 @@ function Form({
   onSetWork,
   exampleInputs,
   exampleWork,
+  clearWork,
+  clearInputs,
 }) {
   return (
     <div className="main-left">
@@ -478,6 +512,12 @@ function Form({
           exampleInputs={exampleInputs}
           exampleWork={exampleWork}
         />
+        <ClearForm
+          onSetInput={onSetInput}
+          onSetWork={onSetWork}
+          clearInputs={clearInputs}
+          clearWork={clearWork}
+        />
       </div>
     </div>
   );
@@ -497,7 +537,18 @@ function Footer() {
   );
 }
 
-function ClearForm() {}
+function ClearForm({ onSetInput, onSetWork, clearInputs, clearWork }) {
+  return (
+    <button
+      onClick={() => {
+        onSetInput(clearInputs);
+        onSetWork(clearWork);
+      }}
+    >
+      Reset Form
+    </button>
+  );
+}
 
 function Example({ onHandleChange, onHandleWork, exampleInputs, exampleWork }) {
   return (
