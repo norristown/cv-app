@@ -1,6 +1,37 @@
 import { useState } from "react";
 
 export default function App() {
+  const exampleInputs = {
+    first: "John",
+    last: "Doe",
+    title: "Full Stack Developer",
+    address: "88 State Street, Smalltown IN 19191",
+    number: "888-888-8888",
+    email: "email@gmail.com",
+  };
+  const exampleWork = {
+    workHistory: [
+      {
+        id: Date.now(),
+        title: "Job 1",
+        company: "Company 1",
+        address: "99 Address Way Philadelphia, PA 19000",
+        from: "2012",
+        until: "Current",
+      },
+    ],
+    education: [
+      {
+        id: Date.now(),
+        name: "Uni University",
+        city: "Ithaca, NY 90000",
+        degree: "Computer Science",
+        from: "2008",
+        until: "2012",
+      },
+    ],
+  };
+
   const [inputs, setInputs] = useState({});
   function handleChange(e) {
     const name = e.target.name;
@@ -155,6 +186,10 @@ export default function App() {
           onDeleteEducation={deleteEducation}
           description={description}
           onSetDescription={setDescription}
+          onSetInput={setInputs}
+          onSetWork={setWork}
+          exampleInputs={exampleInputs}
+          exampleWork={exampleWork}
         />
         <FormPreview inputs={inputs} work={work} description={description} />
       </div>
@@ -197,15 +232,15 @@ function PreviewSectionEducation({ id, work }) {
 function FormPreview({ inputs, work, description }) {
   return (
     <div className="main-preview">
-      <header>
+      <div className="header-container">
         <h1 className="preview-header">
           {inputs.first} {inputs.last}
-        </h1>
+        </h1>{" "}
         <h2>{inputs.title}</h2>
-      </header>
+      </div>
 
-      <div className="sub-preview">
-        <div className="description">
+      <div className="preview-container">
+        <div className="preview-left">
           <div>
             <h3>Description</h3>
             <p>{description}</p>
@@ -235,12 +270,16 @@ function FormPreview({ inputs, work, description }) {
             </div>
           </div>
         </div>
-        <div className="personal-preview">
+        <div className="personal-right">
           <div className="personal-details">
-            <h3>Personal Details</h3>
             <div className="avatar">
-              <img src="" alt="avatar" />
+              <img
+                className="avatar"
+                src={require("./astronaut.png")}
+                alt="avatar"
+              />
             </div>
+            <h3>Personal Details</h3>
             <div>{inputs.address}</div>
             <div>{inputs.number}</div>
             <div>{inputs.email}</div>
@@ -363,6 +402,10 @@ function Form({
   onDeleteEducation,
   onSetDescription,
   description,
+  onSetInput,
+  onSetWork,
+  exampleInputs,
+  exampleWork,
 }) {
   return (
     <div className="main-left">
@@ -429,15 +472,42 @@ function Form({
             ))}
           </div>
         </div>
+        <Example
+          onHandleChange={onSetInput}
+          onHandleWork={onSetWork}
+          exampleInputs={exampleInputs}
+          exampleWork={exampleWork}
+        />
       </div>
     </div>
   );
 }
 
 function Footer() {
-  return <footer>Kevin Jarvis</footer>;
+  return (
+    <footer>
+      <a
+        href="https://www.flaticon.com/free-icons/astronaut"
+        title="astronaut icons"
+      >
+        Astronaut icons created by Freepik - Flaticon
+      </a>
+      Kevin Jarvis
+    </footer>
+  );
 }
 
 function ClearForm() {}
 
-function Button() {}
+function Example({ onHandleChange, onHandleWork, exampleInputs, exampleWork }) {
+  return (
+    <button
+      onClick={() => {
+        onHandleChange(exampleInputs);
+        onHandleWork(exampleWork);
+      }}
+    >
+      Generate Example
+    </button>
+  );
+}

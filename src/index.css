@@ -15,6 +15,8 @@ code {
 }
 
 * {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
 }
 .app {
@@ -70,4 +72,12 @@ footer {
   margin-top: 2rem;
   background-color: grey;
   text-align: center;
+}
+.avatar {
+  height: 200px;
+}
+
+.header-container {
+  background-color: grey;
+  height: 100px;
 }
