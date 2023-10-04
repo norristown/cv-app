@@ -40,8 +40,12 @@ export function EducationSection({
         value={work.education.find((x) => x.id === id).until}
       />
       <div className="buttons">
-        <button onClick={() => onDeleteEducation(id)}>Delete</button>
-        <button onClick={onAddEducation}>Add</button>
+        <button className="delete" onClick={() => onDeleteEducation(id)}>
+          Delete
+        </button>
+        <button className="add" onClick={onAddEducation}>
+          Add
+        </button>
       </div>
     </>
   );

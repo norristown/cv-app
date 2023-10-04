@@ -51,6 +51,7 @@ export function Form({
             />
             <Input placeholder="Email" name="email" onChange={onHandleChange} />
             <textarea
+              placeholder="Short description about yourself"
               value={description}
               onChange={(e) => onSetDescription(e.target.value)}
             ></textarea>

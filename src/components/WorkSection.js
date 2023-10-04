@@ -40,8 +40,10 @@ export function WorkSection({
         value={work.workHistory.find((x) => x.id === id).until}
       />
       <div className="buttons">
-        <button onClick={() => onDeleteWork(id)}>Delete</button>
-        <button onClick={onAddWork}>Add</button>
+        <button className="delete" onClick={() => onDeleteWork(id)}>
+          Delete
+        </button>
+        <button className="add" onClick={onAddWork}>Add</button>
       </div>
     </>
   );
