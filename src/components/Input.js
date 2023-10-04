@@ -9,7 +9,6 @@ export function Input({ name, placeholder, onChange, value, id }) {
         value={value}
         id={id}
       />
-      <br />
     </>
   );
 }

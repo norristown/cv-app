@@ -30,7 +30,7 @@ input {
   border-radius: 3px;
   height: 2rem;
   padding: 5px;
-  margin-bottom: 1rem;
+  margin: 0.4rem 0;
 }
 
 .main-header {
@@ -94,11 +94,12 @@ a {
   height: 200px;
   margin-bottom: 2rem;
   text-align: center;
+  filter: grayscale(100%);
 }
 
 .header-container {
-  background-color: #fcd34d;
-  color: #09090b;
+  background-color: #1e3a8a;
+  color: #eff6ff;
   height: 100px;
   display: flex;
   flex-direction: column;
