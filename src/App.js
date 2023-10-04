@@ -47,22 +47,46 @@ export default function App() {
   const exampleWork = {
     workHistory: [
       {
-        id: Date.now(),
+        id: 0,
         title: "Job 1",
         company: "Company 1",
         address: "99 Address Way Philadelphia, PA 19000",
         from: "2012",
         until: "Current",
       },
+      {
+        id: 1,
+        title: "Job 2",
+        company: "NASA",
+        address: "99 Address Way Philadelphia, PA 19000",
+        from: "1990",
+        until: "1999",
+      },
+      {
+        id: 2,
+        title: "Job 3",
+        company: "Microsoft",
+        address: "99 Address Way Philadelphia, PA 19000",
+        from: "2000",
+        until: "2012",
+      },
     ],
     education: [
       {
-        id: Date.now(),
+        id: 0,
         name: "Uni University",
         city: "Ithaca, NY 90000",
         degree: "Computer Science",
         from: "2008",
         until: "2012",
+      },
+      {
+        id: 1,
+        name: "State School",
+        city: "Jacksonville, FL 90000",
+        degree: "Hotel Management",
+        from: "1998",
+        until: "2002",
       },
     ],
   };
