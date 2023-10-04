@@ -57,8 +57,9 @@ textarea {
 
 .main-preview {
   width: 40%;
-  background-color: silver;
-  height: 960px;
+  max-width: 800px;
+
+  height: 900px;
 }
 .input-field {
   display: flex;
@@ -91,6 +92,7 @@ footer {
 
 .preview-container {
   display: flex;
+  height: 100%;
 }
 
 .preview-left {
@@ -99,14 +101,11 @@ footer {
   flex-direction: column;
   gap: 2rem;
   padding: 1rem;
+  background-color: silver;
 }
 
 textarea {
   height: 4rem;
-}
-
-.personal-right {
-  background-color: red;
 }
 
 .personal-info {
@@ -115,8 +114,32 @@ textarea {
 
 .personal-details {
   padding: 1rem;
+  background-color: green;
 }
 
-.work-preview-details {
+.work-preview-details,
+.school-preview-details {
   padding-bottom: 1rem;
+  display: flex;
+  gap: 1rem;
+}
+
+.work-preview-left,
+.work-preview-right,
+.school-preview-left,
+.school-preview-right {
+  flex: 1;
+}
+
+.work-preview-title,
+.school-preview-name,
+.school-preview-left,
+.work-preview-left {
+  font-weight: bold;
+}
+
+hr {
+  border: 2px solid green;
+  border-radius: 5px;
+  margin: 0.3rem 0;
 }

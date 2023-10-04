@@ -236,27 +236,33 @@ function Header() {
 function PreviewSectionWork({ id, work }) {
   return (
     <div className="work-preview-details">
-      <div>{work.find((x) => x.id === id).title}</div>
-      <div>{work.find((x) => x.id === id).company}</div>
-      <div>{work.find((x) => x.id === id).address}</div>
-
-      <div className="years">
+      <div className="work-preview-left">
         {work.find((x) => x.id === id).from} -{" "}
         {work.find((x) => x.id === id).until}
+      </div>
+      <div className="work-preview-right">
+        <p className="work-preview-title">
+          {work.find((x) => x.id === id).title}
+        </p>
+        <div>{work.find((x) => x.id === id).company}</div>
+        <div>{work.find((x) => x.id === id).address}</div>
       </div>
     </div>
   );
 }
 function PreviewSectionEducation({ id, work }) {
   return (
-    <div>
-      <div>{work.find((x) => x.id === id).name}</div>
-      <div>{work.find((x) => x.id === id).city}</div>
-      <div>{work.find((x) => x.id === id).degree}</div>
-
-      <div>
+    <div className="school-preview-details">
+      <div className="school-preview-left">
         {work.find((x) => x.id === id).from} -{" "}
         {work.find((x) => x.id === id).until}
+      </div>
+      <div className="school-preview-right">
+        <div className="school-preview-name">
+          {work.find((x) => x.id === id).name}
+        </div>
+        <div>{work.find((x) => x.id === id).city}</div>
+        <div>{work.find((x) => x.id === id).degree}</div>
       </div>
     </div>
   );
@@ -275,10 +281,12 @@ function FormPreview({ inputs, work, description }) {
         <div className="preview-left">
           <div>
             <h3>Description</h3>
+            <hr></hr>
             <p>{description}</p>
           </div>
           <div className="experience">
             <h3>Experience</h3>
+            <hr></hr>
             <div className="work">
               {work.workHistory.map((x) => (
                 <PreviewSectionWork
@@ -291,7 +299,8 @@ function FormPreview({ inputs, work, description }) {
           </div>
           <div className="education">
             <h3>Education</h3>
-            <div>
+            <hr></hr>
+            <div className="school">
               {work.education.map((x) => (
                 <PreviewSectionEducation
                   key={x.id}
@@ -302,20 +311,19 @@ function FormPreview({ inputs, work, description }) {
             </div>
           </div>
         </div>
-        <div className="personal-right">
-          <div className="personal-details">
-            <div className="avatar">
-              <img
-                className="avatar"
-                src={require("./astronaut.png")}
-                alt="avatar"
-              />
-            </div>
-            <h3>Personal Details</h3>
-            <div>{inputs.address}</div>
-            <div>{inputs.number}</div>
-            <div>{inputs.email}</div>
+
+        <div className="personal-details">
+          <div className="avatar">
+            <img
+              className="avatar"
+              src={require("./astronaut.png")}
+              alt="avatar"
+            />
           </div>
+          <h3>Personal Details</h3>
+          <div>{inputs.address}</div>
+          <div>{inputs.number}</div>
+          <div>{inputs.email}</div>
         </div>
       </div>
     </div>
