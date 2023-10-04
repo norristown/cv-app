@@ -21,6 +21,7 @@ export function Form({
   exampleWork,
   clearWork,
   clearInputs,
+  inputs,
 }) {
   return (
     <div className="main-left">
@@ -32,24 +33,38 @@ export function Form({
               placeholder="First Name"
               name="first"
               onChange={onHandleChange}
+              value={inputs.first}
             />
             <Input
               placeholder="Last Name"
               name="last"
               onChange={onHandleChange}
+              value={inputs.last}
             />
-            <Input placeholder="Title" name="title" onChange={onHandleChange} />
+            <Input
+              placeholder="Title"
+              name="title"
+              onChange={onHandleChange}
+              value={inputs.title}
+            />
             <Input
               placeholder="Address"
               name="address"
               onChange={onHandleChange}
+              value={inputs.address}
             />
             <Input
               placeholder="Phone Number"
               name="number"
               onChange={onHandleChange}
+              value={inputs.number}
             />
-            <Input placeholder="Email" name="email" onChange={onHandleChange} />
+            <Input
+              placeholder="Email"
+              name="email"
+              onChange={onHandleChange}
+              value={inputs.email}
+            />
             <textarea
               placeholder="Short description about yourself"
               value={description}

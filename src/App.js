@@ -7,11 +7,12 @@ import { Footer } from "./components/Footer";
 export default function App() {
   const clearInputs = {
     id: Date.now(),
+    first: "",
+    last: "",
     title: "",
-    company: "",
     address: "",
-    from: "",
-    until: "",
+    number: "",
+    email: "",
   };
   const clearWork = {
     workHistory: [
@@ -66,7 +67,7 @@ export default function App() {
     ],
   };
 
-  const [inputs, setInputs] = useState({});
+  const [inputs, setInputs] = useState(clearInputs);
   function handleChange(e) {
     const name = e.target.name;
     const value = e.target.value;
@@ -226,6 +227,7 @@ export default function App() {
           exampleWork={exampleWork}
           clearWork={clearWork}
           clearInputs={clearInputs}
+          inputs={inputs}
         />
         <FormPreview inputs={inputs} work={work} description={description} />
       </div>
