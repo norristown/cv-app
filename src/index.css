@@ -113,7 +113,9 @@ textarea {
 
 .personal-details {
   padding: 1rem;
-  background-color: green;
+  background-color: #777;
+  width: 40%;
+  overflow: hidden;
 }
 
 .work-preview-details,
