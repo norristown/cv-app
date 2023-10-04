@@ -122,17 +122,9 @@ a {
   background-color: #fafaf9;
 }
 
-textarea::-webkit-input-placeholder {
-  text-align: center;
-}
-
-textarea:-moz-placeholder {
-  text-align: center;
-}
-
 textarea {
   height: 10rem;
-  padding-top: 1rem;
+  font-family: inherit;
 }
 
 .personal-info {
