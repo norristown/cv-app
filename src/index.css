@@ -24,8 +24,7 @@ code {
   height: 100vh;
 }
 
-input,
-textarea {
+input {
   width: 100%;
   border: 1px solid grey;
   border-radius: 3px;
@@ -139,7 +138,7 @@ textarea {
 }
 
 hr {
-  border: 2px solid green;
+  border: 2px solid grey;
   border-radius: 5px;
   margin: 0.3rem 0;
 }
