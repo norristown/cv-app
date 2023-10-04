@@ -235,12 +235,12 @@ function Header() {
 }
 function PreviewSectionWork({ id, work }) {
   return (
-    <div>
+    <div className="work-preview-details">
       <div>{work.find((x) => x.id === id).title}</div>
       <div>{work.find((x) => x.id === id).company}</div>
       <div>{work.find((x) => x.id === id).address}</div>
 
-      <div>
+      <div className="years">
         {work.find((x) => x.id === id).from} -{" "}
         {work.find((x) => x.id === id).until}
       </div>
@@ -279,7 +279,7 @@ function FormPreview({ inputs, work, description }) {
           </div>
           <div className="experience">
             <h3>Experience</h3>
-            <div>
+            <div className="work">
               {work.workHistory.map((x) => (
                 <PreviewSectionWork
                   key={x.id}
@@ -506,18 +506,22 @@ function Form({
             ))}
           </div>
         </div>
-        <Example
-          onHandleChange={onSetInput}
-          onHandleWork={onSetWork}
-          exampleInputs={exampleInputs}
-          exampleWork={exampleWork}
-        />
-        <ClearForm
-          onSetInput={onSetInput}
-          onSetWork={onSetWork}
-          clearInputs={clearInputs}
-          clearWork={clearWork}
-        />
+        <div className="buttons">
+          <Example
+            onHandleChange={onSetInput}
+            onHandleWork={onSetWork}
+            exampleInputs={exampleInputs}
+            exampleWork={exampleWork}
+            onSetDescription={onSetDescription}
+          />
+          <ClearForm
+            onSetInput={onSetInput}
+            onSetWork={onSetWork}
+            clearInputs={clearInputs}
+            clearWork={clearWork}
+            onSetDescription={onSetDescription}
+          />
+        </div>
       </div>
     </div>
   );
@@ -537,12 +541,20 @@ function Footer() {
   );
 }
 
-function ClearForm({ onSetInput, onSetWork, clearInputs, clearWork }) {
+function ClearForm({
+  onSetInput,
+  onSetWork,
+  clearInputs,
+  clearWork,
+  onSetDescription,
+}) {
   return (
     <button
+      className="clear-button"
       onClick={() => {
         onSetInput(clearInputs);
         onSetWork(clearWork);
+        onSetDescription("");
       }}
     >
       Reset Form
@@ -550,12 +562,22 @@ function ClearForm({ onSetInput, onSetWork, clearInputs, clearWork }) {
   );
 }
 
-function Example({ onHandleChange, onHandleWork, exampleInputs, exampleWork }) {
+function Example({
+  onHandleChange,
+  onHandleWork,
+  exampleInputs,
+  exampleWork,
+  onSetDescription,
+}) {
   return (
     <button
+      className="example-button"
       onClick={() => {
         onHandleChange(exampleInputs);
         onHandleWork(exampleWork);
+        onSetDescription(
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam mollis pellentesque turpis, cursus semper justo luctus a. Nulla dictum, mauris sed ornare imperdiet, sapien justo commodo elit, sed pellentesque urna. "
+        );
       }}
     >
       Generate Example

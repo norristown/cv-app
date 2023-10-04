@@ -67,6 +67,7 @@ textarea {
 .buttons {
   display: flex;
   flex-direction: column;
+  padding-bottom: 1rem;
 }
 footer {
   margin-top: 2rem;
@@ -75,9 +76,47 @@ footer {
 }
 .avatar {
   height: 200px;
+  margin-bottom: 2rem;
+  text-align: center;
 }
 
 .header-container {
   background-color: grey;
   height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.preview-container {
+  display: flex;
+}
+
+.preview-left {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 1rem;
+}
+
+textarea {
+  height: 4rem;
+}
+
+.personal-right {
+  background-color: red;
+}
+
+.personal-info {
+  padding-bottom: 1rem;
+}
+
+.personal-details {
+  padding: 1rem;
+}
+
+.work-preview-details {
+  padding-bottom: 1rem;
 }
