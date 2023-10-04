@@ -26,11 +26,11 @@ code {
 }
 
 input {
-  width: 100%;
   border: none;
   border-radius: 3px;
   height: 2rem;
   padding: 5px;
+  margin-bottom: 1rem;
 }
 
 .main-header {
