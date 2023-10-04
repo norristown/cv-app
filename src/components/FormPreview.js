@@ -56,9 +56,18 @@ export function FormPreview({ inputs, work, description }) {
           </div>
           <h3>Personal Details</h3>
           <hr></hr>
-          <div>{inputs.address}</div>
-          <div>{inputs.number}</div>
-          <div>{inputs.email}</div>
+          <div className="details">
+            <h4>Address</h4>
+            <div>{inputs.address}</div>
+          </div>
+          <div className="details">
+            <h4>Phone Number</h4>
+            <div>{inputs.number}</div>
+          </div>
+          <div className="details">
+            <h4>Email</h4>
+            <div>{inputs.email}</div>
+          </div>
         </div>
       </div>
     </div>
