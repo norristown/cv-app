@@ -67,11 +67,12 @@ input {
   position: fixed;
   left: 50%;
   margin-left: 5%;
-  min-width: 800px;
-  max-width: 800px;
+  /* min-width: 30vw; */
+  /* max-width: 30vw; */
+  width: 30vw;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
   min-height: 900px;
-  height: fit-content;
+  /* height: fit-content; */
   display: grid;
   grid-template-rows: auto 1fr 1fr 1fr 1fr;
   flex: 0.2;
@@ -99,7 +100,8 @@ a {
   color: inherit;
 }
 .avatar {
-  height: 200px;
+  height: auto;
+  width: 100%;
   margin-bottom: 2rem;
   text-align: center;
   filter: grayscale(100%);
