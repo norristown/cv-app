@@ -66,16 +66,16 @@ input {
 .main-preview {
   position: fixed;
   left: 50%;
+  /* bottom: 50px; */
+  /* top: 106px; */
   margin-left: 5%;
   /* min-width: 30vw; */
   /* max-width: 30vw; */
   width: 30vw;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
-  min-height: 900px;
-  /* height: fit-content; */
+  min-height: 70vh;
   display: grid;
   grid-template-rows: auto 1fr 1fr 1fr 1fr;
-  flex: 0.2;
 }
 .input-field {
   display: flex;
@@ -265,7 +265,7 @@ hr {
   position: relative;
   top: 1px;
 }
-@media screen and (max-width: 1490px) {
+@media screen and (max-width: 1368px) {
   .main {
     display: inline;
   }
