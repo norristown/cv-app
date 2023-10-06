@@ -69,6 +69,7 @@ export function Form({
               placeholder="Short description about yourself"
               value={description}
               onChange={(e) => onSetDescription(e.target.value)}
+              maxlength="400"
             ></textarea>
           </div>
         </div>

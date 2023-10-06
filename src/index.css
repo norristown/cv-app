@@ -290,7 +290,7 @@ hr {
     margin-left: 5%; */
     /* min-width: 30vw; */
     /* max-width: 30vw; */
-    width: 50vw;
+    width: 100vw;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
     /* min-height: 900px; */
     /* height: fit-content; */
@@ -299,5 +299,9 @@ hr {
     /* flex: 0.2; */
     position: static;
     margin: 0 auto;
+  }
+  .main-header {
+    font-size: 32px;
+    margin: 0;
   }
 }
