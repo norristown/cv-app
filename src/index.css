@@ -59,6 +59,7 @@ input {
   padding: 1rem;
   border-radius: 5px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  /* flex: 0.4; */
 }
 
 .main-preview {
@@ -68,6 +69,7 @@ input {
   height: fit-content;
   display: grid;
   grid-template-rows: auto 1fr 1fr 1fr 1fr;
+  flex: 0.2;
 }
 .input-field {
   display: flex;
